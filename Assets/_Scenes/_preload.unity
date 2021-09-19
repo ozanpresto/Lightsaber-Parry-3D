@@ -431,7 +431,19 @@ MonoBehaviour:
   m_Value: 60
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1208198145}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: onBackSliderValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &143332102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1445,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1208198145}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: onFrontSliderValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &880037265
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2070,8 @@ MonoBehaviour:
             m_CallState: 2
   frontSlider: {fileID: 847292912}
   backSlider: {fileID: 131267935}
-  InteractablesParent: {fileID: 0}
+  InteractablesParent: {fileID: 1921715360}
+  simulateButton: {fileID: 1858556441}
   vibrationImage: {fileID: 1108496201}
   soundImage: {fileID: 1621011309}
   VonSprite: {fileID: 21300000, guid: 38e75d99335d5402080dbe8e5f3c4310, type: 3}

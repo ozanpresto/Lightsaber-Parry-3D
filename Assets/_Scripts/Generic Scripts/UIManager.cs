@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using RotaryHeart.Lib.SerializableDictionary;
@@ -32,6 +31,7 @@ public class UIManager : MonoBehaviour
     public Slider frontSlider;
     public Slider backSlider;
     public GameObject InteractablesParent;
+    public Button simulateButton;
     private bool isInteractablesOpen = false;
 
 
@@ -202,11 +202,6 @@ public class UIManager : MonoBehaviour
         DemoController.Instance.InitializeGamePlay();
     }
 
-    public void SimulateOnClick()
-    {
-
-    }
-
     public void OpenAndCloseInteractablesParent()
     {
         if (isInteractablesOpen)
@@ -219,9 +214,10 @@ public class UIManager : MonoBehaviour
         {
             isInteractablesOpen = true;
             InteractablesParent.transform.DOComplete();
-            InteractablesParent.transform.DOLocalMoveY(600, 1f).SetRelative(true).SetEase(Ease.InOutCirc);
+            InteractablesParent.transform.DOLocalMoveY(600, 1f).SetRelative(true).SetDelay(0.25f).SetEase(Ease.InOutCirc);
         }
     }
+
     #endregion
 
 }
