@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine.UI;
 using System;
+using DG.Tweening;
 
 public enum PanelNames
 {
@@ -28,6 +29,10 @@ public class UIManager : MonoBehaviour
     public UIPanels UIPanelsDictionary;
 
     [Header("INGAME ITEMS")]
+    public Slider frontSlider;
+    public Slider backSlider;
+    public GameObject InteractablesParent;
+    private bool isInteractablesOpen = false;
 
 
     [Header("MAIN MENU ITEMS")]
@@ -166,6 +171,13 @@ public class UIManager : MonoBehaviour
         Action();
     }
 
+
+
+    #endregion
+
+
+    #region Game Spesific Functions
+
     public void SetupSettings()
     {
         soundImage.sprite = GameManager.Instance.SoundOn ? SonSprite : SoffSprite;
@@ -187,9 +199,29 @@ public class UIManager : MonoBehaviour
     public void StartGamePlay()
     {
         OpenPanel(PanelNames.InGame, true);
-        //start Initialanim
+        DemoController.Instance.InitializeGamePlay();
     }
 
+    public void SimulateOnClick()
+    {
+
+    }
+
+    public void OpenAndCloseInteractablesParent()
+    {
+        if (isInteractablesOpen)
+        {
+            isInteractablesOpen = false;
+            InteractablesParent.transform.DOComplete();
+            InteractablesParent.transform.DOLocalMoveY(-600, 1f).SetRelative(true).SetEase(Ease.InOutCirc);
+        }
+        else
+        {
+            isInteractablesOpen = true;
+            InteractablesParent.transform.DOComplete();
+            InteractablesParent.transform.DOLocalMoveY(600, 1f).SetRelative(true).SetEase(Ease.InOutCirc);
+        }
+    }
     #endregion
 
 }
