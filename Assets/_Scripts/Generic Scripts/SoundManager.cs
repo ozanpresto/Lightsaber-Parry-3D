@@ -5,7 +5,6 @@ public enum SoundTrigger
 {
     Collision,
     ButtonClick,
-    Info,
 }
 
 [System.Serializable]

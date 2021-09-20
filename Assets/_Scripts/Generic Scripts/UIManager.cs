@@ -232,7 +232,10 @@ public class UIManager : MonoBehaviour
     public void showInfoPopUp()
     {
         if (Info != null)
-            Destroy(Info);
+        {
+            Info.GetComponent<Image>().DOFade(0f, 0.5f);
+            Info.GetComponentInChildren<TMPro.TMP_Text>().DOFade(0f, 0.5f);
+        }
 
         Transform parent = null;
         UIPanelAndSetup temp;
@@ -251,7 +254,7 @@ public class UIManager : MonoBehaviour
             Info.GetComponentInChildren<TMPro.TMP_Text>().text = "Wont Collide";
 
         Info.transform.DOScale(Vector3.zero, 0.7f).SetDelay(0.7f);
-        Info.transform.DOLocalMoveY(300, 1f).SetDelay(0.4f).SetRelative(true);
+        Info.transform.DOLocalMoveY(500, 1.4f).SetRelative(true).SetEase(Ease.Linear);
         Info.AddComponent<SelfDestruct>().lifetime = 1.5f;
     }
 
