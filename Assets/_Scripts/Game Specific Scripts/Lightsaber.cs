@@ -9,6 +9,7 @@ public class Lightsaber : MonoBehaviour
     public GameObject lightPart;
     private new Collider collider;
     private Slider connectedSlider;
+    private float oldSliderValue;
 
     private void Start()
     {
@@ -17,27 +18,40 @@ public class Lightsaber : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag(Tags.PLAYER))
+        if (collision.collider.gameObject.CompareTag(Tags.PLAYER))
         {
             SetColliderEnabled(false);
+            transform.DOKill();
+            transform.DOLocalRotate(new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z), 1f / ConfigurableParameters.Instance.simulationSpeed).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                UIManager.Instance.SetInteractables(true);
+                SetColliderEnabled(false);
+            });
             var pos = collision.contacts[0].point;
             EffectsManager.Instance.PlayEffectAtPos(EffectTrigger.Hit, pos, Vector3.zero);
+            Taptic.Medium();
             SoundManager.Instance.PlaySound(SoundTrigger.Collision);
         }
     }
 
     public void Initialize(Slider slider, aColor color)
     {
-        collider = GetComponentInChildren<Collider>();
+        collider = GetComponent<Collider>();
+        SetColliderEnabled(false);
         connectedSlider = slider;
         connectedSlider.onValueChanged.AddListener(delegate { connectedSliderValueChanged(); });
         SetColor(color);
+        oldSliderValue = connectedSlider.value;
+
         InitialAnim();
     }
 
     private void connectedSliderValueChanged()
     {
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, connectedSlider.value);
+        float temp = Mathf.Abs(oldSliderValue - connectedSlider.value);
+        oldSliderValue = connectedSlider.value;
+        DemoController.Instance.SliderValuesChanged(temp);
     }
 
     private void InitialAnim()
@@ -64,5 +78,13 @@ public class Lightsaber : MonoBehaviour
     public void Attack()
     {
         SetColliderEnabled(true);
+        transform.DOLocalRotate(new Vector3(60, 0, 0), 1.2f / ConfigurableParameters.Instance.simulationSpeed).SetEase(Ease.InBack).SetRelative(true).OnComplete(() =>
+        {
+            transform.DOLocalRotate(new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z), 1f / ConfigurableParameters.Instance.simulationSpeed).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                UIManager.Instance.SetInteractables(true);
+                SetColliderEnabled(false);
+            });
+        });
     }
 }

@@ -56,8 +56,8 @@ public class EventCenter : MonoBehaviour
                 break;
             case SceneName.GameScene:
                 UIManager.Instance.OpenPanel(PanelNames.MainMenu, true);
-                UIManager.Instance.frontSlider.value = 0;
-                UIManager.Instance.backSlider.value = 0;
+                UIManager.Instance.frontSlider.value = UIManager.Instance.frontSlider.minValue;
+                UIManager.Instance.backSlider.value = UIManager.Instance.backSlider.minValue;
                 UIManager.Instance.OpenAndCloseInteractablesParent();
                 // Backend
                 // Analytics

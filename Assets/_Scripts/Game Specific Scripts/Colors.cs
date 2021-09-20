@@ -11,7 +11,7 @@ public enum ColorName
     Red,
     Green,
     Blue,
-    Orange,
+    Yellow,
 }
 
 [System.Serializable]

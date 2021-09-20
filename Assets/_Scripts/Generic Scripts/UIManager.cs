@@ -32,7 +32,9 @@ public class UIManager : MonoBehaviour
     public Slider backSlider;
     public GameObject InteractablesParent;
     public Button simulateButton;
+    public GameObject infoPopUpPrefab;
     private bool isInteractablesOpen = true;
+    private GameObject Info = null;
 
 
     [Header("MAIN MENU ITEMS")]
@@ -190,9 +192,9 @@ public class UIManager : MonoBehaviour
         if (UIPanelsDictionary.TryGetValue(PanelNames.Settings, out temp))
         {
             if (temp.UIPanel.activeInHierarchy)
-                temp.UIPanel.SetActive(false);
+                ClosePanel(PanelNames.Settings);
             else
-                temp.UIPanel.SetActive(true);
+                OpenPanel(PanelNames.Settings);
         }
     }
 
@@ -218,6 +220,39 @@ public class UIManager : MonoBehaviour
             InteractablesParent.transform.DOComplete();
             InteractablesParent.transform.DOLocalMoveY(600, 1f).SetRelative(true).SetDelay(0.25f).SetEase(Ease.Linear);
         }
+    }
+
+    public void SetInteractables(bool isInteractable)
+    {
+        simulateButton.interactable = isInteractable;
+        backSlider.interactable = isInteractable;
+        frontSlider.interactable = isInteractable;
+    }
+
+    public void showInfoPopUp()
+    {
+        if (Info != null)
+            Destroy(Info);
+
+        Transform parent = null;
+        UIPanelAndSetup temp;
+        if (UIPanelsDictionary.TryGetValue(PanelNames.InGame, out temp))
+        {
+            parent = temp.UIPanel.transform;
+        }
+
+        Info = Instantiate(infoPopUpPrefab, parent);
+        Info.transform.localEulerAngles = Vector3.zero;
+        Info.transform.localPosition = new Vector3(0, 600, 0);
+        Info.transform.localScale = Vector3.one * 1.5f;
+        if (backSlider.value + frontSlider.value > 32)
+            Info.GetComponentInChildren<TMPro.TMP_Text>().text = "Will Collide";
+        else
+            Info.GetComponentInChildren<TMPro.TMP_Text>().text = "Wont Collide";
+
+        Info.transform.DOScale(Vector3.zero, 0.7f).SetDelay(0.7f);
+        Info.transform.DOLocalMoveY(300, 1f).SetDelay(0.4f).SetRelative(true);
+        Info.AddComponent<SelfDestruct>().lifetime = 1.5f;
     }
 
     #endregion

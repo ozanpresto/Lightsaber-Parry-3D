@@ -11,7 +11,7 @@ public class DemoController : MonoBehaviour
     public Lightsaber backLightsaber;
 
     private Colors colorsRef;
-
+    private float changedValuesOfSliders = 0;
 
     private void Awake()
     {
@@ -29,11 +29,26 @@ public class DemoController : MonoBehaviour
 
     private void Simulate()
     {
+        UIManager.Instance.SetInteractables(false);
         SoundManager.Instance.PlaySound(SoundTrigger.ButtonClick);
         Taptic.Light();
         frontLightsaber.Attack();
         backLightsaber.Attack();
     }
 
-    
+    public void SliderValuesChanged(float difference)
+    {
+        changedValuesOfSliders += difference;
+        if(changedValuesOfSliders > ConfigurableParameters.Instance.minimumAngleChangeForNewCollisionInfo)
+        {
+            showInfoPopUp();
+        }
+    }
+
+    private void showInfoPopUp()
+    {
+        changedValuesOfSliders = 0;
+        UIManager.Instance.showInfoPopUp();
+
+    }
 }

@@ -64,10 +64,10 @@ public class EffectsManager : MonoBehaviour
         switch (effectTrigger)
         {
             case EffectTrigger.Hit:
+                effect.transform.localScale = Vector3.one * 0.7f;
                 break;
             case EffectTrigger.Start:
                 break;
         }
     }
-
 }
