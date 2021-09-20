@@ -3,6 +3,12 @@ using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+public enum GameState
+{
+    None,
+    Paused,
+    Playing,
+};
 
 public enum SceneName
 {
@@ -19,6 +25,9 @@ public class GameManager : MonoBehaviour
     private SceneName currentScene;
 
     #region Generic Properties
+
+    [HideInInspector]
+    public GameState currentGameState;
 
     private bool _soundOn;
     private bool _vibrationOn;
@@ -110,6 +119,23 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void SetGameState(GameState gameState)
+    {
+        Debug.Log("Setting GameState " + gameState.ToString());
+
+        switch (gameState)
+        {
+            case (GameState.Paused):
+                Time.timeScale = 0f;
+                break;
+            case (GameState.Playing):
+                Time.timeScale = 1f;
+                break;
+        }
+
+        currentGameState = gameState;
+    }
+
     public void AdvanceLevel()
     {
         Level++;
@@ -160,5 +186,6 @@ public class GameManager : MonoBehaviour
         Taptic.tapticOn = VibrationOn;
 
         LoadSceneAsync(SceneName.GameScene);
+        SetGameState(GameState.Playing);
     }
 }

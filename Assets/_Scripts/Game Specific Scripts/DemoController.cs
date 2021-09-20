@@ -21,16 +21,19 @@ public class DemoController : MonoBehaviour
 
     public void InitializeGamePlay()
     {
-        frontLightsaber.Initialize(UIManager.Instance.frontSlider, colorsRef.colors[ConfigurableParameters.Instance.frontLightsaberColor], true);
-        backLightsaber.Initialize(UIManager.Instance.backSlider, colorsRef.colors[ConfigurableParameters.Instance.backLightsaberColor], false);
-        UIManager.Instance.OpenAndCloseInteractablesParent();
+        frontLightsaber.Initialize(UIManager.Instance.frontSlider, colorsRef.colors[ConfigurableParameters.Instance.frontLightsaberColor]);
+        backLightsaber.Initialize(UIManager.Instance.backSlider, colorsRef.colors[ConfigurableParameters.Instance.backLightsaberColor]);
         UIManager.Instance.simulateButton.onClick.AddListener(Simulate);
     }
 
 
-    public void Simulate()
+    private void Simulate()
     {
+        SoundManager.Instance.PlaySound(SoundTrigger.ButtonClick);
+        Taptic.Light();
         frontLightsaber.Attack();
         backLightsaber.Attack();
     }
+
+    
 }

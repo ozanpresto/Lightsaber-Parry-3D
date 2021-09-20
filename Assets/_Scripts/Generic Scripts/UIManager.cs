@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
     public Slider backSlider;
     public GameObject InteractablesParent;
     public Button simulateButton;
-    private bool isInteractablesOpen = false;
+    private bool isInteractablesOpen = true;
 
 
     [Header("MAIN MENU ITEMS")]
@@ -199,6 +199,8 @@ public class UIManager : MonoBehaviour
     public void StartGamePlay()
     {
         OpenPanel(PanelNames.InGame, true);
+        OpenAndCloseInteractablesParent();
+        EffectsManager.Instance.PlayEffect(EffectTrigger.Start);
         DemoController.Instance.InitializeGamePlay();
     }
 
@@ -208,13 +210,13 @@ public class UIManager : MonoBehaviour
         {
             isInteractablesOpen = false;
             InteractablesParent.transform.DOComplete();
-            InteractablesParent.transform.DOLocalMoveY(-600, 1f).SetRelative(true).SetEase(Ease.InOutCirc);
+            InteractablesParent.transform.DOLocalMoveY(-600, 0.1f).SetRelative(true).SetEase(Ease.Linear);
         }
         else
         {
             isInteractablesOpen = true;
             InteractablesParent.transform.DOComplete();
-            InteractablesParent.transform.DOLocalMoveY(600, 1f).SetRelative(true).SetDelay(0.25f).SetEase(Ease.InOutCirc);
+            InteractablesParent.transform.DOLocalMoveY(600, 1f).SetRelative(true).SetDelay(0.25f).SetEase(Ease.Linear);
         }
     }
 

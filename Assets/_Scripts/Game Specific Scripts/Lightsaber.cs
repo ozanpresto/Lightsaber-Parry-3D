@@ -9,7 +9,11 @@ public class Lightsaber : MonoBehaviour
     public GameObject lightPart;
     private new Collider collider;
     private Slider connectedSlider;
-    private bool isFront;
+
+    private void Start()
+    {
+        lightPart.transform.localScale = new Vector3(1, 0, 1);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -22,28 +26,25 @@ public class Lightsaber : MonoBehaviour
         }
     }
 
-    public void Initialize(Slider slider, aColor color, bool _isFront)
+    public void Initialize(Slider slider, aColor color)
     {
         collider = GetComponentInChildren<Collider>();
         connectedSlider = slider;
         connectedSlider.onValueChanged.AddListener(delegate { connectedSliderValueChanged(); });
         SetColor(color);
-        isFront = _isFront;
         InitialAnim();
     }
 
     private void connectedSliderValueChanged()
     {
-        Debug.Log(connectedSlider.value);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, connectedSlider.value);
     }
 
     private void InitialAnim()
     {
-        transform.DOLocalRotate(new Vector3(0, 0, 90), 1f);
-        lightPart.transform.DOScale(Vector3.one, 1f);
+        transform.DOLocalRotate(new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0), 1f);
+        lightPart.transform.DOScale(Vector3.one, 1f).SetEase(Ease.Linear);
     }
-
-
 
     private void SetColor(aColor color)
     {

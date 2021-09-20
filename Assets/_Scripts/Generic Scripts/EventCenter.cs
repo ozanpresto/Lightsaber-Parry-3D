@@ -57,7 +57,8 @@ public class EventCenter : MonoBehaviour
             case SceneName.GameScene:
                 UIManager.Instance.OpenPanel(PanelNames.MainMenu, true);
                 UIManager.Instance.frontSlider.value = 0;
-                UIManager.Instance.backSlider.value = 60;
+                UIManager.Instance.backSlider.value = 0;
+                UIManager.Instance.OpenAndCloseInteractablesParent();
                 // Backend
                 // Analytics
                 // UI
