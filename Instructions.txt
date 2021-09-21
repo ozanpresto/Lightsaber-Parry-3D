@@ -1,0 +1,7 @@
+Unity Version:		2020.3.13f
+
+External Assets:		DoTween Pro, Serialized Dictionary Lite, SFX & VFX packs, Fat Machines (Taptic)
+
+Configurable Parameters:	You can change it on GameScene > ConfigurableParameters > Inspector
+
+** Note :		Start game from the _preload scene to avoid errors.
