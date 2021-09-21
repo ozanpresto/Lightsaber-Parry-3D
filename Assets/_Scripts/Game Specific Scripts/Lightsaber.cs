@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using System.Collections;
 
 
 public class Lightsaber : MonoBehaviour
@@ -22,7 +21,7 @@ public class Lightsaber : MonoBehaviour
         {
             SetColliderEnabled(false);
             transform.DOKill();
-            transform.DOLocalRotate(new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z), 1f / ConfigurableParameters.Instance.simulationSpeed).SetEase(Ease.Linear).OnComplete(() =>
+            transform.DOLocalRotate(new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z), 0.5f / ConfigurableParameters.Instance.simulationSpeed).SetEase(Ease.Linear).OnComplete(() =>
             {
                 UIManager.Instance.SetInteractables(true);
                 SetColliderEnabled(false);

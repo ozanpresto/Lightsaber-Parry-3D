@@ -34,6 +34,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(SoundTrigger soundTrigger, bool onlyIfThisSoundNotPlaying = false, bool onlyIfNoSoundsPlaying = false)
     {
+        if (!GameManager.Instance.SoundOn)
+            return;
         if (onlyIfThisSoundNotPlaying)
         {
             if (sounds[soundTrigger].isPlaying)

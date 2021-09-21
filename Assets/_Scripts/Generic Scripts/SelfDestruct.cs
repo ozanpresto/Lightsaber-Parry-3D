@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-// Self-Destruct component
 public class SelfDestruct : MonoBehaviour
 {
     public float lifetime = 3f;
@@ -12,7 +11,6 @@ public class SelfDestruct : MonoBehaviour
         timeAlive = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         timeAlive += Time.unscaledDeltaTime;
