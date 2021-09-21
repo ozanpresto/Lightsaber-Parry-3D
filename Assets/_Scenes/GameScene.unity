@@ -199,7 +199,7 @@ MonoBehaviour:
   frontLightsaberColor: 0
   backLightsaberColor: 1
   simulationSpeed: 1
-  minimumAngleChangeForNewCollisionInfo: 5
+  minimumAngleChangeForNewCollisionInfo: 2.85
 --- !u!1 &270575831
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2045875078, guid: df99a0dc3ab3ac441a08668a42800f89, type: 3}
       propertyPath: m_Center.y
-      value: 1.65
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 5783847747885016257, guid: df99a0dc3ab3ac441a08668a42800f89, type: 3}
       propertyPath: m_Name
@@ -868,7 +868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2045875078, guid: df99a0dc3ab3ac441a08668a42800f89, type: 3}
       propertyPath: m_Center.y
-      value: 1.65
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 5783847747885016257, guid: df99a0dc3ab3ac441a08668a42800f89, type: 3}
       propertyPath: m_Name

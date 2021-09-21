@@ -76,7 +76,8 @@ public class Lightsaber : MonoBehaviour
 
     public void Attack()
     {
-        SetColliderEnabled(true);
+        if (UIManager.Instance.GetSumOfSliderValeus() > 32)
+            SetColliderEnabled(true);
         transform.DOLocalRotate(new Vector3(60, 0, 0), 1.2f / ConfigurableParameters.Instance.simulationSpeed).SetEase(Ease.InBack).SetRelative(true).OnComplete(() =>
         {
             transform.DOLocalRotate(new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z), 1f / ConfigurableParameters.Instance.simulationSpeed).SetEase(Ease.Linear).OnComplete(() =>

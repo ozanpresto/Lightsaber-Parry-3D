@@ -248,7 +248,7 @@ public class UIManager : MonoBehaviour
         Info.transform.localEulerAngles = Vector3.zero;
         Info.transform.localPosition = new Vector3(0, 600, 0);
         Info.transform.localScale = Vector3.one * 1.5f;
-        if (backSlider.value + frontSlider.value > 32)
+        if (GetSumOfSliderValeus() > 32)
             Info.GetComponentInChildren<TMPro.TMP_Text>().text = "Will Collide";
         else
             Info.GetComponentInChildren<TMPro.TMP_Text>().text = "Wont Collide";
@@ -256,6 +256,11 @@ public class UIManager : MonoBehaviour
         Info.transform.DOScale(Vector3.zero, 0.7f).SetDelay(0.7f);
         Info.transform.DOLocalMoveY(500, 1.4f).SetRelative(true).SetEase(Ease.Linear);
         Info.AddComponent<SelfDestruct>().lifetime = 1.5f;
+    }
+
+    public float GetSumOfSliderValeus()
+    {
+        return backSlider.value + frontSlider.value;
     }
 
     #endregion
